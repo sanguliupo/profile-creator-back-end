@@ -21,17 +21,17 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get("/", (req, res)=>{
-
-	const {description, name} = req.body;
-	db('profiles')
-	  .returning('*')
-	  .insert({
-		name:name,
-		description: description,
-	}).then(profile=>{
-		res.json(profile);
-	})
-	.catch(err => res.status(400).json("unable to create profile"))	
+	res.send("it is working");
+	// const {description, name} = req.body;
+	// db('profiles')
+	//   .returning('*')
+	//   .insert({
+	// 	name:name,
+	// 	description: description,
+	// }).then(profile=>{
+	// 	res.json(profile);
+	// })
+	// .catch(err => res.status(400).json("unable to create profile"))	
 })
 
 
