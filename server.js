@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get("/", (req, res)=>{
-	res.send("it is working");
+	res.send("it is working");y
 	// const {description, name} = req.body;
 	// db('profiles')
 	//   .returning('*')
