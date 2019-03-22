@@ -16,6 +16,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+app.get("/", (req, res) =>{
+		res.send("backend is working!");
+});
+
 app.get("/profiles", (req, res) =>{
 	console.log('request to profiles');
 	db.select('*').from('profile').then(data =>{
