@@ -11,58 +11,33 @@ const db = knex({
   }
 });
 
-db.select('*').from('profiles').then(data =>{
-	console.log(data);
-});
-
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/", (req, res)=>{
-	res.send("it is working");y
-	// const {description, name} = req.body;
-	// db('profiles')
-	//   .returning('*')
-	//   .insert({
-	// 	name:name,
-	// 	description: description,
-	// }).then(profile=>{
-	// 	res.json(profile);
-	// })
-	// .catch(err => res.status(400).json("unable to create profile"))	
-})
+app.get("/profiles", (req, res) =>{
+	console.log('request to profiles');
+	db.select('*').from('profile').then(data =>{
+		res.json(data);
+	});
+});
 
-
-app.post("/register", (req, res)=>{
-	const {description, name} = req.body;
-	db('profiles')
+app.post("/profile", (req, res)=>{
+	const {name, description, imageUrl} = req.body;
+	db('profile')
 	  .returning('*')
 	  .insert({
-		name:name,
-		description: description,
-	})
-	  .then(response =>{
-		res.json(response);
-	})
-	.catch(err => res.status(400).json("unable to create profile"))	
+			name:name,
+			description: description,
+			image: imageUrl
+		})
+	 .then(response =>{
+			res.json(response);
+		})
+		.catch(err => res.status(400).json("unable to create profile"))	
 })
-
 
 app.listen(process.env.PORT || 3000, ()=>{
 	console.log("app running")
 });
-
-
-
-
-/*
-
-/-->this is working
-/signin-->POST  success/fail
-/register -->POST = user
-/profile/:userId -->GET =user
-
-
-*/
